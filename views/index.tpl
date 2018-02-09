@@ -85,9 +85,9 @@
 		var start_color = $("#col-6-2").css("background-color");
 		var end_color = $("#col-1-4").css("background-color");
 
-		$("#col-6-2").animate({ backgroundColor: "#f1c40f"}, 600, function(){
+		$("#col-6-2").animate({ backgroundColor: "#f1c40f"}, 700, function(){
 			$("#col-1-4").css("background", "#2ecc71");
-			$("#col-1-4").animate({opacity: 1}, 600, function(){
+			$("#col-1-4").animate({opacity: 1}, 700, function(){
 				// Make a move
 				$("#col-1-4").empty();
 				$("#col-6-2").children().appendTo($("#col-1-4"));
