@@ -7,12 +7,12 @@
 <style>
 .holder {
 	margin-top: 30px;
-	border: 1px #000 dashed;
+	border: 1px #000 solid;
 }
 .my-col {
 	float:left;
 	border: 1px solid rgba(44, 62, 80, 0.3);
-	background: #EDF0CF;
+	background: #EAD7B3;
 }
 </style>
 </head>
@@ -82,17 +82,18 @@
 
 			Running for loop on list of lists
 		*/
-		var start_color = $("#col-4-2").css("background-color");
-		var end_color = $("#col-3-3").css("background-color");
+		var start_color = $("#col-6-2").css("background-color");
+		var end_color = $("#col-1-4").css("background-color");
 
-		$("#col-4-2").animate({ backgroundColor: "#45aaf2"}, 500, function(){
-			$("#col-3-3").css("background", "#2ecc71");
-			$("#col-3-3").animate({opacity: 1}, 800, function(){
+		$("#col-6-2").animate({ backgroundColor: "#f1c40f"}, 600, function(){
+			$("#col-1-4").css("background", "#2ecc71");
+			$("#col-1-4").animate({opacity: 1}, 600, function(){
 				// Make a move
-				$("#col-4-2").children().appendTo($("#col-3-3"));
+				$("#col-1-4").empty();
+				$("#col-6-2").children().appendTo($("#col-1-4"));
 				// reset background colors
-				$("#col-4-2").css("background", start_color);
-				$("#col-3-3").css("background", end_color);
+				$("#col-6-2").css("background", start_color);
+				$("#col-1-4").css("background", end_color);
 			});
    		});
 	}
@@ -102,11 +103,11 @@
 	{
 		if (i % 2 == 0 && j % 2 == 1)
 		{
-			$("#col-"+i+"-"+j).css("background", "#6C9B4F");
+			$("#col-"+i+"-"+j).css("background", "#614033");
 		}
 		if (i % 2 == 1 && j % 2 == 0)
 		{
-			$("#col-"+i+"-"+j).css("background", "#6C9B4F");
+			$("#col-"+i+"-"+j).css("background", "#614033");
 		}
 		
 		var pawn_height = $(".holder").height()/row;
