@@ -2,7 +2,7 @@ from implement import *
 
 # Global Variable
 
-my_state = intial_state(8, 8, 4)
+my_state = intial_state(6, 6, 4)
 
 def start_web():
 

@@ -1,11 +1,12 @@
 <html>
 <head>
-	<title>Giorgi</title>
+	<title>Breakthrough with AI</title>
 	<link rel="stylesheet" href="static/tether.min.css">
 	<link rel="stylesheet" href="static/bootstrap.min.css">
 
 <style>
 .holder {
+	margin-top: 30px;
 	border: 1px #000 dashed;
 }
 .my-col {
@@ -16,12 +17,14 @@
 </style>
 </head>
 <body>
-
+	
 	<center>
-	<br><br>
-	<div class="holder">
-	  <div id="table" class="table"></div>
-	</div>
+		<h2>SHOWING JUST ONE MOVE TO TEST</h2>
+		<button id="start" class="btn btn-success">Start</button>
+
+		<div class="holder">
+		  <div id="table" class="table"></div>
+		</div>
 	<center>
 	
 
@@ -69,10 +72,32 @@
 
 	$(".my-col").css("width", $(".holder").width()/col);
 	$(".my-col").css("height", $(".holder").height()/row);
-
-	// $("#col-2-0").append();
+						
 
 	// helper functions
+	function run()
+	{
+		/*
+			TO SHOW THE WHOLE GAME I NEED FORMAT [[pos1, next_position1],[pos2, next_position2] ... ]
+
+			Running for loop on list of lists
+		*/
+		var start_color = $("#col-4-2").css("background-color");
+		var end_color = $("#col-3-3").css("background-color");
+
+		$("#col-4-2").animate({ backgroundColor: "#45aaf2"}, 500, function(){
+			$("#col-3-3").css("background", "#2ecc71");
+			$("#col-3-3").animate({opacity: 1}, 800, function(){
+				// Make a move
+				$("#col-4-2").children().appendTo($("#col-3-3"));
+				// reset background colors
+				$("#col-4-2").css("background", start_color);
+				$("#col-3-3").css("background", end_color);
+			});
+   		});
+	}
+
+
 	function beautify(i, j)
 	{
 		if (i % 2 == 0 && j % 2 == 1)
@@ -97,6 +122,8 @@
 			$("#col-"+i+"-"+j).append(white);
 		}
 	}
+
+	$("#start").click(run);
 
 
 
