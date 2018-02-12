@@ -42,6 +42,36 @@ def transition(state, start, finish):
 
 	return state
 
+def terminal_test(state):
+
+	x_count = 0
+	o_count = 0
+	winner = ""
+
+
+	for i in range(len(state)):
+		for j in range(len(state[i])):
+
+			if i == 0:
+				if state[i][j] == "O":
+					winner = "O"
+
+			if i == len(state):
+				if state[i][j] == "X":
+					winner = "X"
+
+			if state[i][j] == "X":
+				x_count += 1
+			if state[i][j] == "O":
+				o_count += 1
+
+	if x_count == 0:
+		winner = "O"
+	elif o_count == 0:
+		winner = "X"
+
+	return "The winner is: " + winner
+
 
 def directions(state, player, position):
 

@@ -82,18 +82,18 @@
 
 			Running for loop on list of lists
 		*/
-		var start_color = $("#col-6-2").css("background-color");
-		var end_color = $("#col-1-4").css("background-color");
+		var start_color = $("#col-5-5").css("background-color");
+		var end_color = $("#col-0-0").css("background-color");
 
-		$("#col-6-2").animate({ backgroundColor: "#f1c40f"}, 700, function(){
-			$("#col-1-4").css("background", "#2ecc71");
-			$("#col-1-4").animate({opacity: 1}, 700, function(){
+		$("#col-5-5").animate({ backgroundColor: "#f1c40f"}, 700, function(){
+			$("#col-0-0").css("background", "#2ecc71");
+			$("#col-0-0").animate({opacity: 1}, 700, function(){
 				// Make a move
-				$("#col-1-4").empty();
-				$("#col-6-2").children().appendTo($("#col-1-4"));
+				$("#col-0-0").empty();
+				$("#col-5-5").children().appendTo($("#col-0-0"));
 				// reset background colors
-				$("#col-6-2").css("background", start_color);
-				$("#col-1-4").css("background", end_color);
+				$("#col-5-5").css("background", start_color);
+				$("#col-0-0").css("background", end_color);
 			});
    		});
 	}
