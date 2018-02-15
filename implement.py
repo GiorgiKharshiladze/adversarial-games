@@ -1,3 +1,4 @@
+# Part 1
 def intial_state(rows, cols, row_pieces):
 
 	state = []
@@ -29,18 +30,21 @@ def display_state(state):
 	for row in state:
 		print(''.join(row))
 
-def transition(state, start, finish):
+from copy import deepcopy
+def transition(state, player, start, finish):
 
 	i_end = finish[0]
 	j_end = finish[1]
 
+	our_state = deepcopy(state)
+
 	for i in range(len(state)):
 		for j in range(len(state[i])):
 			if (i, j) == start:
-				state[i_end][j_end] = state[i][j]
-				state[i][j] = "."
+				our_state[i][j] = "."
+				our_state[i_end][j_end] = player
 
-	return state
+	return our_state
 
 def terminal_test(state):
 
@@ -113,6 +117,25 @@ def move_generator(state, player):
 
 	for i in range(len(state)):
 		for j in range(len(state[i])):
-			all_moves[(i, j)] = directions(state, player, (i, j))
+			if state[i][j] == player:
+				all_moves[(i, j)] = directions(state, player, (i, j))
 
 	return all_moves
+
+# Part 2
+from random import random
+
+def utility_generator(player, current_state):
+
+	if player == "X":
+		return count_pieces("X", current_state) + random()
+	elif player == "O":
+		return count_pieces("O", current_state) + random()
+
+def count_pieces(player, current_state):
+	counter = 0
+	for i in range(len(current_state)):
+		for j in range(len(current_state[i])):
+			if current_state[i][j] == player:
+				counter += 1
+	return counter
