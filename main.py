@@ -5,11 +5,11 @@ from implement import *
 my_state = intial_state(4, 4, 2)
 
 class Node(object):
-    def __init__(self):
+    def __init__(self, state):
         self.parent = None
         self.children = []
         self.action = None 
-        self.state = None
+        self.state = state
         self.utility = None
 
     def add_child(self, node):
@@ -28,12 +28,24 @@ class Node(object):
     		return False
 
 
-# def tree_generator(current_state, player):
+def tree_generator(current_state, player):
 
-# 	possible_moves = move_generator(current_state, player)
-# 	temp_depth = 0
+	possible_moves = move_generator(current_state, player)
+	temp_depth = 0
 
-# 	while temp_depth < 3:
+
+	root = Node(deepcopy(current_state))
+	current_node = root
+
+	while temp_depth < 2:
+		for j in possible_states(current_state, player):
+			current_node.add_child(Node(j))
+		temp_depth += 1
+		for k in current_node.children:
+			current_node = k
+
+	return root
+
 
 def possible_states(current_state, player):
 
@@ -66,7 +78,9 @@ if __name__ == '__main__':
 
 	display_state(my_state)
 
-	print(possible_states(my_state, "O"))
+	# print(possible_states(my_state, "O"))
+	for i in tree_generator(my_state, "X").children:
+		display_state(i.state)
 
 	# print(utility_generator("X", my_state))
 	# print(terminal_test(my_state))
