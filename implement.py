@@ -125,6 +125,32 @@ def move_generator(state, player):
 # Part 2
 from random import random
 
+class Node(object):
+    def __init__(self, state, utility):
+        self.parent = None
+        self.children = []
+        self.action = None 
+        self.state = state
+        self.utility = utility
+        self.size = 0
+
+    def add_child(self, node):
+    	self.children.append(node)
+    	node.parent = self
+    	self.size += 1
+
+    def is_root(self):
+    	if self.parent == None:
+    		return True
+    	else:
+    		return False
+
+    def is_leaf(self):
+    	if self.child == []:
+    		return True
+    	else:
+    		return False
+
 def utility_generator(player, current_state):
 
 	if player == "X":
