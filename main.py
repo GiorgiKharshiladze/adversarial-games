@@ -5,46 +5,36 @@ from sys import maxsize as maximum
 MAX_VALUE = maximum
 MIN_VALUE = -maximum
 
-print(MIN_VALUE)
-my_state = intial_state(4, 4, 2)
-
-
-def tree_generator(current_state, player):
-
-	root = Node(deepcopy(current_state), None)
-	current_node = root
-
-	for j in possible_states(current_state, player):
-		current_node.add_child(Node(j, utility_generator(player, j)))
-
-
-	for k in current_node.children:
-		for l in possible_states(k.state, player):
-			k.add_child(Node(l, utility_generator(player, l)))
-
-	return root
-
-
-def possible_states(current_state, player):
-
-	every_state = []
-	one_state = []
-
-	possible_moves = move_generator(current_state, player)
-
-	for i in possible_moves.keys():
-		if len(possible_moves[i]) != 0:
-			for j in possible_moves[i]:
-				one_state = transition(current_state, player, i, j)
-				every_state.append(one_state)
-
-	return every_state
+my_state = intial_state(3, 2, 2)
 
 def start_web():
 
 	global my_state
 
 	return my_state
+
+def minimax(node, depth, max_player):
+
+	if depth == 0:
+		return node.utility, node.state
+
+	if max_player:
+
+		best_value = MIN_VALUE
+		for i in node.children:
+			my_value = minimax(i, depth-1, False)[0]
+			best_value = max(best_value, my_value)
+
+		return best_value, i.state
+
+	else:
+
+		best_value = MAX_VALUE
+		for i in node.children:
+			my_value = minimax(i, depth-1, True)[0]
+			best_value = min(best_value, my_value)
+
+		return best_value, i.state
 
 
 if __name__ == '__main__':
@@ -56,10 +46,23 @@ if __name__ == '__main__':
 
 	# display_state(my_state)
 
-	# print(possible_states(my_state, "O"))
+	for i in possible_states(my_state, "X"):
+		display_state(i)
+		print()
 
-	for i in tree_generator(my_state, "X").children:
-		print(i.utility)
+	origin = tree_generator(my_state, "X")
+
+	print("BEST VALUE ", minimax(origin, 2, True)[0])
+	display_state(minimax(origin, 2, True)[1])
+
+
+	for i in origin.children:
+		print("Parent :", i.utility)
+		print("--------------------")
+		for j in i.children:
+			print("Child node:", j.utility)
+		print("====================")
+
 
 	# print(utility_generator("X", my_state))
 	# print(terminal_test(my_state))
