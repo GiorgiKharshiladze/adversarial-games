@@ -51,18 +51,18 @@ def terminal_test(state):
 	x_count = 0
 	o_count = 0
 	winner = ""
-
-
 	for i in range(len(state)):
 		for j in range(len(state[i])):
 
 			if i == 0:
 				if state[i][j] == "O":
 					winner = "O"
+					return True 
 
-			if i == len(state):
+			if i == len(state)-1:
 				if state[i][j] == "X":
 					winner = "X"
+					return True 
 
 			if state[i][j] == "X":
 				x_count += 1
@@ -71,10 +71,12 @@ def terminal_test(state):
 
 	if x_count == 0:
 		winner = "O"
+		return True 
 	elif o_count == 0:
 		winner = "X"
+		return True 
 
-	return "The winner is: " + winner
+	# return "The winner is: " + winner
 
 
 def directions(state, player, position):
@@ -90,7 +92,7 @@ def directions(state, player, position):
 		if j > 0 and state[i+1][j-1] != "X":
 			my_moves.append((i+1, j-1))
 		# Forward
-		if state[i+1][j] != "X":
+		if state[i+1][j] != "X" and state[i+1][j] != "O":
 			my_moves.append((i+1, j))
 		# Left
 		if j < len(state[i])-1 and state[i+1][j+1] != "X":
@@ -102,7 +104,7 @@ def directions(state, player, position):
 		if j > 0 and state[i-1][j-1] != "O":
 			my_moves.append((i-1, j-1))
 		# Forward
-		if state[i-1][j] != "O":
+		if state[i-1][j] != "O" and state[i-1][j] != "X":
 			my_moves.append((i-1, j))
 		# Right
 		if j < len(state[i])-1 and state[i-1][j+1] != "O":
@@ -151,7 +153,7 @@ class Node(object):
     	else:
     		return False
 
-def utility_generator(player, current_state):
+def evasive(player, current_state):
 
 	if player == "X":
 		return count_pieces("X", current_state) + random()
@@ -166,22 +168,36 @@ def count_pieces(player, current_state):
 				counter += 1
 	return counter
 
+def conqueror(player, current_state):
+	if player == "X":
+		utility = (0 - count_pieces("O", current_state)) + random()
+		return utility 
 
-def tree_generator(current_state, player):
+	elif player == "O":
+		utility = (0 - count_pieces("X", current_state)) + random()
+		return utility 
+
+def tree_generator(current_state, player, strategy):
 
 	root = Node(deepcopy(current_state), None)
 	current_node = root
 
 	for j in possible_states(current_state, player):
-		current_node.add_child(Node(j, utility_generator(player, j)))
+		if strategy == "evasive":
+			current_node.add_child(Node(j, evasive(player, j)))
 
+		elif strategy == "conqueror":
+			current_node.add_child(Node(j, conqueror(player, j)))
 
 	for k in current_node.children:
 		for l in possible_states(k.state, player):
-			k.add_child(Node(l, utility_generator(player, l)))
+			if strategy == "evasive":
+				k.add_child(Node(l, evasive(player, l)))
+
+			elif strategy == "conqueror":
+				k.add_child(Node(l, conqueror(player, l)))
 
 	return root
-
 
 def possible_states(current_state, player):
 
