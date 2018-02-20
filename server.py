@@ -1,14 +1,12 @@
 from bottle import route, run, template, request, static_file
-from main import *
+from main import start_web, end_web
 import os
 
-
-game_info = start_web()
-game = end_web()
+print("Please wait till server runs !")
 
 @route('/')
 def index():
-	return template('views/index', table = game_info, moves = game)
+	return template('views/index', table = start_web(), moves = end_web())
 
 @route('/static/:path#.+#', name='static')
 def static(path):
@@ -18,4 +16,4 @@ def static(path):
 def send_static(filename):
     return static_file(filename, root='static/img') 
 	
-run(host='localhost', port=8080, debug=True, reloader=True)
+run(host='localhost', port=8080, debug=False, reloader=False)

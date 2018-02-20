@@ -5,7 +5,7 @@ from sys import maxsize as maximum
 MAX_VALUE = maximum
 MIN_VALUE = -maximum
 
-my_state = intial_state(8, 8, 4)
+my_state = intial_state(4, 4, 2)
 all_moves = []
 
 def start_web():
@@ -15,8 +15,8 @@ def start_web():
 	return my_state
 
 def end_web():
-
-	return playGame(my_state, "O")
+	
+	return playWeb(my_state, "O")
 
 def myMove(state_old, state_new, player):
 	change = []
@@ -52,6 +52,22 @@ def minimax(node, depth, max_player):
 			best_value = min(best_value, my_value)
 
 		return best_value, i.state
+
+def playWeb(current_state, player_turn):
+	if terminal_test(current_state) != True:
+		if player_turn == "X":
+			origin = tree_generator(current_state, player_turn, "conqueror")
+			updated_state = minimax(origin, 2, True)[1]
+			all_moves.append(myMove(current_state, updated_state, player_turn))
+			playWeb(updated_state, "O")
+
+		elif player_turn == "O":
+			origin = tree_generator(current_state, player_turn, "evasive")
+			updated_state = minimax(origin, 2, True)[1]
+			all_moves.append(myMove(current_state, updated_state, player_turn))
+			playWeb(updated_state, "X")
+
+	return all_moves
 
 def playGame(current_state, player_turn):
 	if terminal_test(current_state) != True:
