@@ -36,6 +36,8 @@
 
 	var my_table = {{ !table }};
 
+	var my_game = {{ !moves }};
+
 	var row = my_table.length;
 	var col = my_table[0].length;
 
@@ -82,21 +84,36 @@
 
 			Running for loop on list of lists
 		*/
-		var start_color = $("#col-5-5").css("background-color");
-		var end_color = $("#col-0-0").css("background-color");
+		for (i=0; i < my_game.length; i++)
+		{
+			
 
-		$("#col-5-5").animate({ backgroundColor: "#f1c40f"}, 700, function(){
-			$("#col-0-0").css("background", "#2ecc71");
-			$("#col-0-0").animate({opacity: 1}, 700, function(){
-				// Make a move
-				$("#col-0-0").empty();
-				$("#col-5-5").children().appendTo($("#col-0-0"));
-				// reset background colors
-				$("#col-5-5").css("background", start_color);
-				$("#col-0-0").css("background", end_color);
-			});
-   		});
+			var i_start = my_game[i][0][0];
+			var j_start = my_game[i][0][1];
+			var i_end = my_game[i][1][0];
+			var j_end = my_game[i][1][1];
+   			
+   			console.log(i_start, j_start);
+   			console.log(i_end, j_end);
+
+			var start_color = $("#col-4-4").css("background-color");
+			var end_color = $("#col-3-4").css("background-color");
+
+			$("#col-4-4").animate({ backgroundColor: "#f1c40f"}, 700, function(){
+				$("#col-3-4").css("background", "#2ecc71");
+				$("#col-3-4").animate({opacity: 1}, 700, function(){
+					// Make a move
+					$("#col-3-4").empty();
+					$("#col-4-4").children().appendTo($("#col-3-4"));
+					// reset background colors
+					$("#col-4-4").css("background", start_color);
+					$("#col-3-4").css("background", end_color);
+				});
+	   		});
+
+   		}
 	}
+	
 
 
 	function beautify(i, j)

@@ -4,11 +4,11 @@ import os
 
 
 game_info = start_web()
-# game = mouse_path()
+game = end_web()
 
 @route('/')
 def index():
-	return template('views/index', table = game_info) #, game=path_data)
+	return template('views/index', table = game_info, moves = game)
 
 @route('/static/:path#.+#', name='static')
 def static(path):

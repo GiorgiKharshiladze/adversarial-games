@@ -14,6 +14,10 @@ def start_web():
 
 	return my_state
 
+def end_web():
+
+	return playGame(my_state, "O")
+
 def myMove(state_old, state_new, player):
 	change = []
 	for i in range(len(state_old)):
