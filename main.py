@@ -1,12 +1,13 @@
 from implement import *
 from sys import maxsize as maximum
+from rules import rows, cols, row_pieces, starter
 
 # Global Variable
 MAX_VALUE = maximum
 MIN_VALUE = -maximum
 
-my_state = intial_state(6, 6, 2)
 all_moves = []
+my_state = intial_state(rows, cols, row_pieces)
 
 def start_web():
 
@@ -16,7 +17,7 @@ def start_web():
 
 def end_web():
 	
-	return playWeb(my_state, "O")
+	return playWeb(my_state, starter)
 
 def myMove(state_old, state_new, player):
 	change = []
@@ -98,37 +99,7 @@ def playGame(current_state, player_turn):
 
 if __name__ == '__main__':
 
-	# next_state = possible_states(my_state, "O")[0]
-
-	# display_state(my_state)
-	# print()
-	# display_state(next_state)
-
-	# myMove(my_state, next_state, "O")
-
-	# tran_state = transition(my_state, player, (6,0), (0,0))
-
-	# print(move_generator(my_state, "O"))
-
-	# display_state(my_state)
-
-	# for i in possible_states(my_state, "X"):
-	# 	display_state(i)
-	# 	print()
-
-	# for i in tree_generator(my_state, "X", "evasive").children:
-	# 	for j in i.children:
-	# 		print(j.size)
-
-
-	# origin = tree_generator(my_state, "X")
-
-	# print("BEST VALUE ", minimax(origin, 2, True)[0])
-	# display_state(minimax(origin, 2, True)[1])
-
-	print(playGame(my_state, "O"))
-	#print (utility_generator("X", new_state))
-
-
-	# print(utility_generator("X", my_state))
 	# print(terminal_test(my_state))
+
+	playGame(my_state, starter)
+
