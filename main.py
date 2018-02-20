@@ -5,7 +5,7 @@ from sys import maxsize as maximum
 MAX_VALUE = maximum
 MIN_VALUE = -maximum
 
-my_state = intial_state(5,5,2)
+my_state = intial_state(8,8,4)
 all_moves = []
 
 def start_web():
@@ -100,7 +100,9 @@ if __name__ == '__main__':
 	# 	display_state(i)
 	# 	print()
 
-
+	# for i in tree_generator(my_state, "X", "evasive").children:
+	# 	for j in i.children:
+	# 		print(j.size)
 
 
 	# origin = tree_generator(my_state, "X")

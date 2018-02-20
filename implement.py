@@ -197,6 +197,15 @@ def tree_generator(current_state, player, strategy):
 			elif strategy == "conqueror":
 				k.add_child(Node(l, conqueror(player, l)))
 
+	for m in current_node.children:
+		for n in m.children:
+			for q in possible_states(n.state, player):
+				if strategy == "evasive":
+					n.add_child(Node(q, evasive(player, q)))
+
+				elif strategy == "conqueror":
+					n.add_child(Node(q, conqueror(player, q)))
+
 	return root
 
 def possible_states(current_state, player):
