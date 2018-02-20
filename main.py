@@ -5,7 +5,7 @@ from sys import maxsize as maximum
 MAX_VALUE = maximum
 MIN_VALUE = -maximum
 
-my_state = intial_state(8,8,4)
+my_state = intial_state(4,4,2)
 all_moves = []
 
 def start_web():
@@ -75,7 +75,7 @@ def playGame(current_state, player_turn):
 			print (" ")
 			playGame(updated_state, "X")
 	else:
-		print(all_moves)
+		print("Game Over!")
 
 	return all_moves
 
@@ -110,7 +110,7 @@ if __name__ == '__main__':
 	# print("BEST VALUE ", minimax(origin, 2, True)[0])
 	# display_state(minimax(origin, 2, True)[1])
 
-	playGame(my_state, "O")
+	print(playGame(my_state, "O"))
 	#print (utility_generator("X", new_state))
 
 

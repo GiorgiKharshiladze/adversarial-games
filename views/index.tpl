@@ -19,9 +19,9 @@
 <body>
 	
 	<center>
-		<h2>SHOWING JUST ONE MOVE TO TEST</h2>
+		<h2>Play BreakThru</h2>
 		<button id="start" class="btn btn-success">Start</button>
-
+ 
 		<div class="holder">
 		  <div id="table" class="table"></div>
 		</div>
@@ -77,43 +77,64 @@
 						
 
 	// helper functions
-	function run()
+	// function run()
+	// {
+	// 		var start_color = $("#col-"+i_start+"-"+j_start).css("background-color");
+	// 		var end_color = $("#col-"+i_end+"-"+j_end).css("background-color");
+
+	// 		$("#col-"+i_start+"-"+j_start).animate({ backgroundColor: "#f1c40f"}, (i+1)*1000, function(){
+	// 			$("#col-"+i_end+"-"+j_end).css("background", "#2ecc71");
+	// 			$("#col-"+i_end+"-"+j_end).animate({opacity: 1}, (i+1)*500, function(){
+	// 				// Make a move
+	// 				$("#col-"+i_end+"-"+j_end).empty();
+	// 				$("#col-"+i_start+"-"+j_start).children().appendTo($("#col-"+i_end+"-"+j_end));
+	// 				// reset background colors
+	// 				$("#col-"+i_start+"-"+j_start).css("background", start_color);
+	// 				$("#col-"+i_end+"-"+j_end).css("background", end_color);
+	// 			});
+	//    		});
+	// }
+
+
+
+	$(function(){ $('#start').click(playGame)});
+
+	var i = 0;
+	function playGame()
 	{
-		/*
-			TO SHOW THE WHOLE GAME I NEED FORMAT [[pos1, next_position1],[pos2, next_position2] ... ]
-
-			Running for loop on list of lists
-		*/
-		for (i=0; i < my_game.length; i++)
+		if (my_game[i])
 		{
-			
+			document.getElementById("start").innerHTML = "Next Move";
+			document.getElementById("start").className = "btn btn-primary";
+		}
+		else {
+			alert("Game Over !");
+			document.getElementById("start").innerHTML = "Restart";
+			document.getElementById("start").className = "btn btn-warning";
+			window.location.reload();
+		}
 
-			var i_start = my_game[i][0][0];
-			var j_start = my_game[i][0][1];
-			var i_end = my_game[i][1][0];
-			var j_end = my_game[i][1][1];
-   			
-   			console.log(i_start, j_start);
-   			console.log(i_end, j_end);
+		var i_start = my_game[i][0][0];
+		var j_start = my_game[i][0][1];
+		var i_end 	= my_game[i][1][0];
+		var j_end 	= my_game[i][1][1];
 
-			var start_color = $("#col-4-4").css("background-color");
-			var end_color = $("#col-3-4").css("background-color");
+		var start_color = $("#col-"+i_start+"-"+j_start).css("background-color");
+		var end_color = $("#col-"+i_end+"-"+j_end).css("background-color");
 
-			$("#col-4-4").animate({ backgroundColor: "#f1c40f"}, 700, function(){
-				$("#col-3-4").css("background", "#2ecc71");
-				$("#col-3-4").animate({opacity: 1}, 700, function(){
-					// Make a move
-					$("#col-3-4").empty();
-					$("#col-4-4").children().appendTo($("#col-3-4"));
-					// reset background colors
-					$("#col-4-4").css("background", start_color);
-					$("#col-3-4").css("background", end_color);
-				});
-	   		});
-
-   		}
+		$("#col-"+i_start+"-"+j_start).animate({ backgroundColor: "#f1c40f"}, 400, function(){
+			$("#col-"+i_end+"-"+j_end).css("background", "#2ecc71");
+			$("#col-"+i_end+"-"+j_end).animate({opacity: 1}, 400, function(){
+				// Make a move
+				$("#col-"+i_end+"-"+j_end).empty();
+				$("#col-"+i_start+"-"+j_start).children().appendTo($("#col-"+i_end+"-"+j_end));
+				// reset background colors
+				$("#col-"+i_start+"-"+j_start).css("background", start_color);
+				$("#col-"+i_end+"-"+j_end).css("background", end_color);
+			});
+   		});
+   		i += 1;
 	}
-	
 
 
 	function beautify(i, j)
@@ -140,9 +161,6 @@
 			$("#col-"+i+"-"+j).append(white);
 		}
 	}
-
-	$("#start").click(run);
-
 
 
 </script>
