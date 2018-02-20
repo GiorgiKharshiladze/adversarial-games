@@ -3,7 +3,6 @@
 	<title>Breakthrough with AI</title>
 	<link rel="stylesheet" href="static/tether.min.css">
 	<link rel="stylesheet" href="static/bootstrap.min.css">
-
 <style>
 .holder {
 	margin-top: 30px;
@@ -77,25 +76,6 @@
 						
 
 	// helper functions
-	// function run()
-	// {
-	// 		var start_color = $("#col-"+i_start+"-"+j_start).css("background-color");
-	// 		var end_color = $("#col-"+i_end+"-"+j_end).css("background-color");
-
-	// 		$("#col-"+i_start+"-"+j_start).animate({ backgroundColor: "#f1c40f"}, (i+1)*1000, function(){
-	// 			$("#col-"+i_end+"-"+j_end).css("background", "#2ecc71");
-	// 			$("#col-"+i_end+"-"+j_end).animate({opacity: 1}, (i+1)*500, function(){
-	// 				// Make a move
-	// 				$("#col-"+i_end+"-"+j_end).empty();
-	// 				$("#col-"+i_start+"-"+j_start).children().appendTo($("#col-"+i_end+"-"+j_end));
-	// 				// reset background colors
-	// 				$("#col-"+i_start+"-"+j_start).css("background", start_color);
-	// 				$("#col-"+i_end+"-"+j_end).css("background", end_color);
-	// 			});
-	//    		});
-	// }
-
-
 
 	$(function(){ $('#start').click(playGame)});
 
@@ -135,7 +115,6 @@
    		});
    		i += 1;
 	}
-
 
 	function beautify(i, j)
 	{
