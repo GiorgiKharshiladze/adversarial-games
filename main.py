@@ -5,7 +5,7 @@ from sys import maxsize as maximum
 MAX_VALUE = maximum
 MIN_VALUE = -maximum
 
-my_state = intial_state(4,4,2)
+my_state = intial_state(8, 8, 4)
 all_moves = []
 
 def start_web():
