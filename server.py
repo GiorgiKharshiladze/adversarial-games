@@ -16,4 +16,4 @@ def static(path):
 def send_static(filename):
     return static_file(filename, root='static/img') 
 	
-run(host='localhost', port=8080, debug=True, reloader=False)
+run(host='localhost', port=8080, debug=False, reloader=False)
