@@ -19,7 +19,7 @@
 	
 	<center>
 		<h2>Play BreakThru</h2>
-		<button id="start" class="btn btn-success">Start</button>
+		<button id="start" class="btn btn-success">Start Game</button>
  
 		<div class="holder">
 		  <div id="table" class="table"></div>

@@ -1,4 +1,4 @@
-# adversarial-games
+# Adversarial Games - Lab B in CS365 - Artificial Intelligence & Machine Learning Class
 
 This is a BREAKTHRU game written in python, & bottle framework for GUI(Graphical User Interface) in web
 
@@ -7,16 +7,19 @@ This moves are based on Minimax algorithm and each player has its own playing st
 
 There is some HTML, CSS & JavaScript code to render the design in your browser
 
-Before running this game you should check out rules.py file and modify some rules like: Number of rows, columns, row_pieces and pawn color which starts the game
+Before running this game you should check out _rules.py_ file and modify some rules like: Number of rows, columns, row_pieces and pawn color which starts the game
 
-After you modify rules.py you can run `python3 main.py` to see resuls in command line
+After you modify _rules.py_ you can run `python3 main.py` to see resuls in the command line
 
 # Graphical User Interface
 In the command line, run:
 	`python3 server.py`
 
-Go to `http://localhost:8080/` and have fun !
+Go to `http://localhost:8080/`, click on *Start Game* button, See each of the *Next Move* done by the Minimax Algorithm and have fun ! :joy:
 
+![BreakThru](/static/img/game.png)
 
-### p.s.
-Bigger the dimentions are, longer it takes to run the game  
+### P.S.
+Bigger the dimentions are, longer it takes to run the game
+
+### Authors: Giorgi Kharshiladze(@GiorgiKharshiladze) & Abhinav Pandey (@abhinavp246)
