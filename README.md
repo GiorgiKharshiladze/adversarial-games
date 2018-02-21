@@ -1,6 +1,7 @@
-# Adversarial Games - Lab B in CS365 - Artificial Intelligence & Machine Learning Class
+# Adversarial Games - Lab B 
+## CS365 - Artificial Intelligence & Machine Learning Class
 
-This is a BREAKTHRU game written in python, & bottle framework for GUI(Graphical User Interface) in web
+This is a **BREAKTHRU** game written in python, & bottle framework for GUI(Graphical User Interface) in web
 
 This moves are based on Minimax algorithm and each player has its own playing strategy:
 	White Paws are using evasive(non-offensive) while Black ones are using conqueror(offensive)
@@ -15,11 +16,11 @@ After you modify _rules.py_ you can run `python3 main.py` to see resuls in the c
 In the command line, run:
 	`python3 server.py`
 
-Go to `http://localhost:8080/`, click on *Start Game* button, See each of the *Next Move* done by the Minimax Algorithm and have fun ! :joy:
+Go to `http://localhost:8080/`, click on **Start Game** button, See each of the **Next Move** done by the Minimax Algorithm and have fun ! :smile:
 
 ![BreakThru](/static/img/game.png)
 
 ### P.S.
 Bigger the dimentions are, longer it takes to run the game
 
-### Authors: Giorgi Kharshiladze(@GiorgiKharshiladze) & Abhinav Pandey (@abhinavp246)
+> Authors: Giorgi Kharshiladze(@GiorgiKharshiladze) & Abhinav Pandey (@abhinavp246)
