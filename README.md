@@ -21,4 +21,4 @@ Go to `http://localhost:8080/`, click on **Start Game** button, See each of the 
 ### P.S.
 > Bigger the dimentions are, longer it takes to run the game
 
-Authors: Giorgi Kharshiladze @GiorgiKharshiladze & Abhinav Pandey @abhinavp246
+Authors: [Giorgi Kharshiladze](https://github.com/GiorgiKharshiladze/) & [Abhinav Pandey](https://github.com/abhinavp246)
