@@ -189,8 +189,9 @@ def block(player, current_state):
 
 	return max(utilityList)+random()
 
-def straight(player, current_state):
-	print("gio")
+def combine(player, current_state):
+
+	return conqueror(player, current_state) + evasive(player, current_state)
 
 # Strategies: END
 
@@ -204,6 +205,9 @@ def getUtility(strategy, player, current_state):
 
 	elif strategy == "block":
 		return block(player, current_state)
+
+	elif strategy == "combine":
+		return combine(player, current_state)
 
 def tree_generator(current_state, player, strategy):
 

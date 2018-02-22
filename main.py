@@ -97,6 +97,7 @@ def playGame(current_state, player_turn, X_strategy, O_strategy):
 			playGame(updated_state, "X", X_strategy, O_strategy)
 	else:
 		print("Game Over!")
+		
 
 	return all_moves
 
@@ -107,5 +108,5 @@ if __name__ == '__main__':
 
 	# print(block("X", my_state))
 
-	playGame(my_state, starter, "evasive", "block")
+	playGame(my_state, starter, "conqueror", "combine")
 
