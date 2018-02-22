@@ -58,7 +58,7 @@ def minimax(node, depth, max_player):
 
 		return best_value, my_node.state
 
-def playWeb(current_state, player_turn):
+def playWeb(current_state, player_turn, X_strategy, O_strategy):
 	if terminal_test(current_state) != True:
 		if player_turn == "X":
 			origin = tree_generator(current_state, player_turn, "conqueror")
@@ -74,27 +74,27 @@ def playWeb(current_state, player_turn):
 
 	return all_moves
 
-def playGame(current_state, player_turn):
+def playGame(current_state, player_turn, X_strategy, O_strategy):
 	if terminal_test(current_state) != True:
 		if player_turn == "X":
-			origin = tree_generator(current_state, player_turn, "conqueror")
+			origin = tree_generator(current_state, player_turn, X_strategy)
 			updated_state = minimax(origin, 2, True)[1]
 			all_moves.append(myMove(current_state, updated_state, player_turn))
 			display_state(updated_state)
 			print (" ")
-			print (conqueror("X", updated_state))
+			print (getUtility(X_strategy, "X", updated_state))
 			print (" ")
-			playGame(updated_state, "O")
+			playGame(updated_state, "O", X_strategy, O_strategy)
 
 		elif player_turn == "O":
-			origin = tree_generator(current_state, player_turn, "conqueror")
+			origin = tree_generator(current_state, player_turn, O_strategy)
 			updated_state = minimax(origin, 2, True)[1]
 			all_moves.append(myMove(current_state, updated_state, player_turn))
 			display_state(updated_state)
 			print (" ")
-			print (evasive("O", updated_state))
+			print (getUtility(O_strategy, "O", updated_state))
 			print (" ")
-			playGame(updated_state, "X")
+			playGame(updated_state, "X", X_strategy, O_strategy)
 	else:
 		print("Game Over!")
 
@@ -105,5 +105,5 @@ if __name__ == '__main__':
 
 	# print(terminal_test(my_state))
 
-	playGame(my_state, starter)
+	playGame(my_state, starter, "conqueror", "evasive")
 

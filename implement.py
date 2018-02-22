@@ -153,13 +153,6 @@ class Node(object):
     	else:
     		return False
 
-def evasive(player, current_state):
-
-	if player == "X":
-		return count_pieces("X", current_state) + random()
-	elif player == "O":
-		return count_pieces("O", current_state) + random()
-
 def count_pieces(player, current_state):
 	counter = 0
 	for i in range(len(current_state)):
@@ -168,6 +161,8 @@ def count_pieces(player, current_state):
 				counter += 1
 	return counter
 
+# Strategies: START
+
 def conqueror(player, current_state):
 	if player == "X":
 		utility = (0 - count_pieces("O", current_state)) + random()
@@ -175,7 +170,24 @@ def conqueror(player, current_state):
 
 	elif player == "O":
 		utility = (0 - count_pieces("X", current_state)) + random()
-		return utility 
+		return utility
+
+def evasive(player, current_state):
+
+	if player == "X":
+		return count_pieces("X", current_state) + random()
+	elif player == "O":
+		return count_pieces("O", current_state) + random()
+
+# Strategies: END
+
+def getUtility(strategy, player, current_state):
+
+	if strategy == "conqueror":
+		return conqueror(player, current_state)
+
+	elif strategy == "evasive":
+		return evasive(player, current_state)
 
 def tree_generator(current_state, player, strategy):
 
