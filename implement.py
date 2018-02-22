@@ -57,11 +57,13 @@ def terminal_test(state):
 			if i == 0:
 				if state[i][j] == "O":
 					winner = "O"
+					print("The winner is: " + winner)
 					return True 
 
 			if i == len(state)-1:
 				if state[i][j] == "X":
 					winner = "X"
+					print("The winner is: " + winner)
 					return True 
 
 			if state[i][j] == "X":
@@ -71,12 +73,13 @@ def terminal_test(state):
 
 	if x_count == 0:
 		winner = "O"
-		return True 
+		print("The winner is: " + winner)
+		return True
+
 	elif o_count == 0:
 		winner = "X"
-		return True 
-
-	# return "The winner is: " + winner
+		print("The winner is: " + winner)
+		return True
 
 
 def directions(state, player, position):
@@ -187,11 +190,14 @@ def block(player, current_state):
 			if current_state[i][j] == opponentOf(player):
 				utilityList.append(-j)
 
-	return max(utilityList)+random()
+	if (len(utilityList) == 0):
+		return 10000
+	else: 
+		return max(utilityList)+random()
 
 def combine(player, current_state):
 
-	return conqueror(player, current_state) + evasive(player, current_state)
+	return conqueror(player, current_state) + block(player, current_state)
 
 # Strategies: END
 
@@ -208,6 +214,7 @@ def getUtility(strategy, player, current_state):
 
 	elif strategy == "combine":
 		return combine(player, current_state)
+
 
 def tree_generator(current_state, player, strategy):
 
