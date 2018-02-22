@@ -17,7 +17,7 @@ def start_web():
 
 def end_web():
 	
-	return playWeb(my_state, starter)
+	return playWeb(my_state, starter, "combine", "conqueror")
 
 def myMove(state_old, state_new, player):
 	change = []
@@ -61,16 +61,16 @@ def minimax(node, depth, max_player):
 def playWeb(current_state, player_turn, X_strategy, O_strategy):
 	if terminal_test(current_state) != True:
 		if player_turn == "X":
-			origin = tree_generator(current_state, player_turn, "conqueror")
+			origin = tree_generator(current_state, player_turn, X_strategy)
 			updated_state = minimax(origin, 2, True)[1]
 			all_moves.append(myMove(current_state, updated_state, player_turn))
-			playWeb(updated_state, "O")
+			playWeb(updated_state, "O", X_strategy, O_strategy)
 
 		elif player_turn == "O":
-			origin = tree_generator(current_state, player_turn, "evasive")
+			origin = tree_generator(current_state, player_turn, O_strategy)
 			updated_state = minimax(origin, 2, True)[1]
 			all_moves.append(myMove(current_state, updated_state, player_turn))
-			playWeb(updated_state, "X")
+			playWeb(updated_state, "X", X_strategy, O_strategy)
 
 	return all_moves
 
@@ -97,7 +97,7 @@ def playGame(current_state, player_turn, X_strategy, O_strategy):
 			playGame(updated_state, "X", X_strategy, O_strategy)
 	else:
 		print("Game Over!")
-		
+
 
 	return all_moves
 
