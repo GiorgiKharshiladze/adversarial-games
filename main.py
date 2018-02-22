@@ -41,18 +41,22 @@ def minimax(node, depth, max_player):
 		best_value = MIN_VALUE
 		for i in node.children:
 			my_value = minimax(i, depth-1, False)[0]
-			best_value = max(best_value, my_value)
+			if best_value < my_value:
+				best_value = my_value
+				my_node = i
 
-		return best_value, i.state
+		return best_value, my_node.state
 
 	else:
 
 		best_value = MAX_VALUE
 		for i in node.children:
 			my_value = minimax(i, depth-1, True)[0]
-			best_value = min(best_value, my_value)
+			if best_value > my_value:
+				best_value = my_value
+				my_node = i
 
-		return best_value, i.state
+		return best_value, my_node.state
 
 def playWeb(current_state, player_turn):
 	if terminal_test(current_state) != True:
@@ -83,7 +87,7 @@ def playGame(current_state, player_turn):
 			playGame(updated_state, "O")
 
 		elif player_turn == "O":
-			origin = tree_generator(current_state, player_turn, "evasive")
+			origin = tree_generator(current_state, player_turn, "conqueror")
 			updated_state = minimax(origin, 2, True)[1]
 			all_moves.append(myMove(current_state, updated_state, player_turn))
 			display_state(updated_state)
