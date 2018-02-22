@@ -105,5 +105,7 @@ if __name__ == '__main__':
 
 	# print(terminal_test(my_state))
 
-	playGame(my_state, starter, "conqueror", "evasive")
+	# print(block("X", my_state))
+
+	playGame(my_state, starter, "evasive", "block")
 

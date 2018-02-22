@@ -161,23 +161,36 @@ def count_pieces(player, current_state):
 				counter += 1
 	return counter
 
+def opponentOf(player):
+
+	if player == "X":
+		return "O"
+	else:
+		return "X"
+
 # Strategies: START
 
 def conqueror(player, current_state):
-	if player == "X":
-		utility = (0 - count_pieces("O", current_state)) + random()
-		return utility 
 
-	elif player == "O":
-		utility = (0 - count_pieces("X", current_state)) + random()
-		return utility
+	return (0 - count_pieces(opponentOf(player), current_state)) + random()
 
 def evasive(player, current_state):
 
-	if player == "X":
-		return count_pieces("X", current_state) + random()
-	elif player == "O":
-		return count_pieces("O", current_state) + random()
+	return count_pieces(player, current_state) + random()
+
+def block(player, current_state):
+
+	utilityList = []
+
+	for i in range(len(current_state)):
+		for j in range(len(current_state[i])):
+			if current_state[i][j] == opponentOf(player):
+				utilityList.append(-j)
+
+	return max(utilityList)+random()
+
+def straight(player, current_state):
+	print("gio")
 
 # Strategies: END
 
@@ -189,34 +202,25 @@ def getUtility(strategy, player, current_state):
 	elif strategy == "evasive":
 		return evasive(player, current_state)
 
+	elif strategy == "block":
+		return block(player, current_state)
+
 def tree_generator(current_state, player, strategy):
 
 	root = Node(deepcopy(current_state), None)
 	current_node = root
 
 	for j in possible_states(current_state, player):
-		if strategy == "evasive":
-			current_node.add_child(Node(j, evasive(player, j)))
-
-		elif strategy == "conqueror":
-			current_node.add_child(Node(j, conqueror(player, j)))
+		current_node.add_child(Node(j, getUtility(strategy, player, j)))
 
 	for k in current_node.children:
 		for l in possible_states(k.state, player):
-			if strategy == "evasive":
-				k.add_child(Node(l, evasive(player, l)))
-
-			elif strategy == "conqueror":
-				k.add_child(Node(l, conqueror(player, l)))
+			k.add_child(Node(l, getUtility(strategy, player, l)))
 
 	for m in current_node.children:
 		for n in m.children:
 			for q in possible_states(n.state, player):
-				if strategy == "evasive":
-					n.add_child(Node(q, evasive(player, q)))
-
-				elif strategy == "conqueror":
-					n.add_child(Node(q, conqueror(player, q)))
+				n.add_child(Node(q, getUtility(strategy, player, q)))
 
 	return root
 
