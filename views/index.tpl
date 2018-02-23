@@ -13,6 +13,9 @@
 	border: 1px solid rgba(44, 62, 80, 0.3);
 	background: #EAD7B3;
 }
+.pawn {
+	height: 50px;
+}
 </style>
 </head>
 <body>
@@ -20,7 +23,19 @@
 	<center>
 		<h2>Play BreakThru</h2>
 		<button id="start" class="btn btn-success">Start Game</button>
- 
+ 		
+ 		<br>
+ 		<br>
+ 		
+		<table>
+			<tr>
+				<td><img src="static/img/white_pawn.png" class="pawn"></td>
+				<td>{{ o }}</td>
+				<td><img src="static/img/black_pawn.png" class="pawn"></td>
+				<td>{{ x }}</td>
+			</tr>
+		</table>
+
 		<div class="holder">
 		  <div id="table" class="table"></div>
 		</div>
@@ -128,8 +143,8 @@
 		}
 		
 		var pawn_height = $(".holder").height()/row;
-		var black = "<img src='static/img/black_pawn.png' class='pawn' height='"+pawn_height+"'>";
-		var white = "<img src='static/img/white_pawn.png' class='pawn' height='"+pawn_height+"'>";
+		var black = "<img src='static/img/black_pawn.png' height='"+pawn_height+"'>";
+		var white = "<img src='static/img/white_pawn.png' height='"+pawn_height+"'>";
 
 		if (my_table[i][j] == "X")
 		{

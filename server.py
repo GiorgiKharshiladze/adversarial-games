@@ -1,12 +1,12 @@
 from bottle import route, run, template, request, static_file
-from main import start_web, end_web
+from main import start_web, end_web, o_strategy, x_strategy
 import os
 
 print("Please wait till server runs !")
 
 @route('/')
 def index():
-	return template('views/index', table = start_web(), moves = end_web())
+	return template('views/index', table = start_web(), moves = end_web(), o = o_strategy, x = x_strategy)
 
 @route('/static/:path#.+#', name='static')
 def static(path):
