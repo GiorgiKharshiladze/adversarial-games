@@ -1,6 +1,6 @@
 from implement import *
 from sys import maxsize as maximum
-from rules import rows, cols, row_pieces, starter
+from rules import rows, cols, row_pieces, starter, x_strategy, o_strategy
 
 # Global Variable
 MAX_VALUE = maximum
@@ -19,7 +19,7 @@ def start_web():
 
 def end_web():
 	
-	return playWeb(my_state, starter, "conqueror", "enhanced")
+	return playWeb(my_state, starter, x_strategy, o_strategy)
 
 def myMove(state_old, state_new, player):
 	change = []
@@ -61,7 +61,7 @@ def minimax(node, depth, max_player):
 		return best_value, my_node.state
 
 def getTotalMoves():
-	return total_moves
+	print("Total Number of Moves :", total_moves)
 
 def playWeb(current_state, player_turn, X_strategy, O_strategy):
 	if terminal_test(current_state) != True:
@@ -80,9 +80,10 @@ def playWeb(current_state, player_turn, X_strategy, O_strategy):
 	return all_moves
 
 def playGame(current_state, player_turn, X_strategy, O_strategy):
+	global total_moves
+	total_moves += 1
 	if terminal_test(current_state) != True:
 		if player_turn == "X":
-			total_moves += 1
 			origin = tree_generator(current_state, player_turn, X_strategy)
 			updated_state = minimax(origin, 2, True)[1]
 			all_moves.append(myMove(current_state, updated_state, player_turn))
@@ -93,7 +94,6 @@ def playGame(current_state, player_turn, X_strategy, O_strategy):
 			playGame(updated_state, "O", X_strategy, O_strategy)
 
 		elif player_turn == "O":
-			total_moves += 1
 			origin = tree_generator(current_state, player_turn, O_strategy)
 			updated_state = minimax(origin, 2, True)[1]
 			all_moves.append(myMove(current_state, updated_state, player_turn))
@@ -103,6 +103,7 @@ def playGame(current_state, player_turn, X_strategy, O_strategy):
 			print (" ")
 			playGame(updated_state, "X", X_strategy, O_strategy)
 	else:
+		getTotalMoves()
 		print("Game Over!")
 
 
@@ -112,6 +113,4 @@ if __name__ == '__main__':
 
 	# print(terminal_test(my_state))
 
-	playGame(my_state, starter, "conqueror", "evasive")
-	getTotalMoves()
-
+	playGame(my_state, starter, x_strategy, o_strategy)
