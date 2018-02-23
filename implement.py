@@ -230,14 +230,22 @@ def block(player, current_state):
 		return max(utilityList)+random()
 
 def enhanced(player, current_state):
-
 	for i in range(len(current_state)):
 		for j in range(len(current_state[i])):
-			if len(current_state) == 8 and i>0 and i<7:
+			if len(current_state) == 8:
 				if current_state[i][1] == player and current_state[i][2] == player and current_state[i][5] == player and current_state[i][6] == player:
-					return 10000 + random()
+					return 1000 + random()
+			if len(current_state) == 6:
+				if current_state[i][1] == player and current_state[i][3] == player:
+					return 1000 + random()
+
+	if playerWinTest(player, current_state):
+		return 10000
+
+	if playerWinTest(opponentOf(player), current_state):
+		return -10000
 		
-	return conqueror(player, current_state)
+	return (0 - count_pieces(opponentOf(player), current_state)) + random()
 
 
 

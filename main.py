@@ -105,7 +105,5 @@ if __name__ == '__main__':
 
 	# print(terminal_test(my_state))
 
-	# print(block("X", my_state))
-
 	playGame(my_state, starter, "enhanced", "conqueror")
 
