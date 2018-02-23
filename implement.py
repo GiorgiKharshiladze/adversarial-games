@@ -57,13 +57,13 @@ def terminal_test(state):
 			if i == 0:
 				if state[i][j] == "O":
 					winner = "O"
-					#print("The winner is: " + winner)
+					print("The winner is: " + winner)
 					return True 
 
 			if i == len(state)-1:
 				if state[i][j] == "X":
 					winner = "X"
-					#print("The winner is: " + winner)
+					print("The winner is: " + winner)
 					return True 
 
 			if state[i][j] == "X":
@@ -73,12 +73,12 @@ def terminal_test(state):
 
 	if x_count == 0:
 		winner = "O"
-		#print("The winner is: " + winner)
+		print("The winner is: " + winner)
 		return True
 
 	elif o_count == 0:
 		winner = "X"
-		#print("The winner is: " + winner)
+		print("The winner is: " + winner)
 		return True
 
 def playerWinTest(player, state):
@@ -219,26 +219,27 @@ def block(player, current_state):
 					utilityList.append(-i)
 
 	if (len(utilityList) == 0):
-		return 100000
+		return 10000
+
 	if playerWinTest(player, current_state):
-		return 10000000
+		return 10000
+
 	if playerWinTest(opponentOf(player), current_state):
-		return 1000000
+		return -10000
 	else: 
 		return max(utilityList)+random()
 
-# def maxWin(player, current_state):
-# 	if playerWinTest(player, current_state):
-# 		return 100000
-# 	if playerWinTest(opponentOf(player), current_state):
-# 		return -100000
+def enhanced(player, current_state):
 
-# def countStrat(player, current_state):
+	for i in range(len(current_state)):
+		for j in range(len(current_state[i])):
+			if len(current_state) == 8 and i>0 and i<7:
+				if current_state[i][1] == player and current_state[i][2] == player and current_state[i][5] == player and current_state[i][6] == player:
+					return 10000 + random()
+		
+	return conqueror(player, current_state)
 
-# def combine(player, current_state):
 
-
-	# return -conqueror(player, current_state) - block(player, current_state)
 
 # Strategies: END
 
@@ -256,8 +257,8 @@ def getUtility(strategy, player, current_state):
 	elif strategy == "combine":
 		return combine(player, current_state)
 
-	elif strategy == "maxWin":
-		return maxWin(player, current_state)
+	elif strategy == "enhanced":
+		return enhanced(player, current_state)
 
 
 

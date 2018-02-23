@@ -107,5 +107,5 @@ if __name__ == '__main__':
 
 	# print(block("X", my_state))
 
-	playGame(my_state, starter, "conqueror", "block")
+	playGame(my_state, starter, "enhanced", "conqueror")
 
