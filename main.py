@@ -9,6 +9,8 @@ MIN_VALUE = -maximum
 all_moves = []
 my_state = intial_state(rows, cols, row_pieces)
 
+total_moves = 0
+
 def start_web():
 
 	global my_state
@@ -58,6 +60,9 @@ def minimax(node, depth, max_player):
 
 		return best_value, my_node.state
 
+def getTotalMoves():
+	return total_moves
+
 def playWeb(current_state, player_turn, X_strategy, O_strategy):
 	if terminal_test(current_state) != True:
 		if player_turn == "X":
@@ -77,6 +82,7 @@ def playWeb(current_state, player_turn, X_strategy, O_strategy):
 def playGame(current_state, player_turn, X_strategy, O_strategy):
 	if terminal_test(current_state) != True:
 		if player_turn == "X":
+			total_moves += 1
 			origin = tree_generator(current_state, player_turn, X_strategy)
 			updated_state = minimax(origin, 2, True)[1]
 			all_moves.append(myMove(current_state, updated_state, player_turn))
@@ -87,6 +93,7 @@ def playGame(current_state, player_turn, X_strategy, O_strategy):
 			playGame(updated_state, "O", X_strategy, O_strategy)
 
 		elif player_turn == "O":
+			total_moves += 1
 			origin = tree_generator(current_state, player_turn, O_strategy)
 			updated_state = minimax(origin, 2, True)[1]
 			all_moves.append(myMove(current_state, updated_state, player_turn))
@@ -105,5 +112,6 @@ if __name__ == '__main__':
 
 	# print(terminal_test(my_state))
 
-	playGame(my_state, starter, "enhanced", "conqueror")
+	playGame(my_state, starter, "conqueror", "evasive")
+	getTotalMoves()
 
