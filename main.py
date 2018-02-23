@@ -101,12 +101,11 @@ def playGame(current_state, player_turn, X_strategy, O_strategy):
 
 	return all_moves
 
-
 if __name__ == '__main__':
 
 	# print(terminal_test(my_state))
 
 	# print(block("X", my_state))
 
-	playGame(my_state, starter, "conqueror", "combine")
+	playGame(my_state, starter, "conqueror", "block")
 

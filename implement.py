@@ -57,13 +57,13 @@ def terminal_test(state):
 			if i == 0:
 				if state[i][j] == "O":
 					winner = "O"
-					print("The winner is: " + winner)
+					#print("The winner is: " + winner)
 					return True 
 
 			if i == len(state)-1:
 				if state[i][j] == "X":
 					winner = "X"
-					print("The winner is: " + winner)
+					#print("The winner is: " + winner)
 					return True 
 
 			if state[i][j] == "X":
@@ -73,13 +73,38 @@ def terminal_test(state):
 
 	if x_count == 0:
 		winner = "O"
-		print("The winner is: " + winner)
+		#print("The winner is: " + winner)
 		return True
 
 	elif o_count == 0:
 		winner = "X"
-		print("The winner is: " + winner)
+		#print("The winner is: " + winner)
 		return True
+
+def playerWinTest(player, state):
+	x_count = 0
+	o_count = 0 
+	if player == "X":
+		for i in range(len(state)):
+			for j in range(len(state[i])):
+				if state[i][j] == "O":
+					o_count +=1
+				if i == len(state)-1:
+					if state[i][j] == "X":
+						return True
+		if o_count == 0:
+			return True
+
+	if player == "O":
+		for i in range(len(state)):
+			for j in range(len(state[i])):
+				if state[i][j] == "X":
+					x_count +=1
+				if i == 0:
+					if state[i][j] == "O":
+						return True
+		if x_count == 0:
+			return True  
 
 
 def directions(state, player, position):
@@ -188,16 +213,32 @@ def block(player, current_state):
 	for i in range(len(current_state)):
 		for j in range(len(current_state[i])):
 			if current_state[i][j] == opponentOf(player):
-				utilityList.append(-j)
+				if player == "X":
+					utilityList.append(i)
+				else:
+					utilityList.append(-i)
 
 	if (len(utilityList) == 0):
-		return 10000
+		return 100000
+	if playerWinTest(player, current_state):
+		return 10000000
+	if playerWinTest(opponentOf(player), current_state):
+		return 1000000
 	else: 
 		return max(utilityList)+random()
 
-def combine(player, current_state):
+# def maxWin(player, current_state):
+# 	if playerWinTest(player, current_state):
+# 		return 100000
+# 	if playerWinTest(opponentOf(player), current_state):
+# 		return -100000
 
-	return conqueror(player, current_state) + block(player, current_state)
+# def countStrat(player, current_state):
+
+# def combine(player, current_state):
+
+
+	# return -conqueror(player, current_state) - block(player, current_state)
 
 # Strategies: END
 
@@ -214,6 +255,10 @@ def getUtility(strategy, player, current_state):
 
 	elif strategy == "combine":
 		return combine(player, current_state)
+
+	elif strategy == "maxWin":
+		return maxWin(player, current_state)
+
 
 
 def tree_generator(current_state, player, strategy):
