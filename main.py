@@ -17,7 +17,7 @@ def start_web():
 
 def end_web():
 	
-	return playWeb(my_state, starter, "combine", "conqueror")
+	return playWeb(my_state, starter, "conqueror", "enhanced")
 
 def myMove(state_old, state_new, player):
 	change = []
