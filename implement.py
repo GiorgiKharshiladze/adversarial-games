@@ -303,3 +303,4 @@ def possible_states(current_state, player):
 				every_state.append(one_state)
 
 	return every_state
+
