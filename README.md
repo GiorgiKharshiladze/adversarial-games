@@ -7,7 +7,12 @@ This is a **BREAKTHRU** game written in python, & bottle framework for GUI(Graph
 
 - There is some HTML, CSS & JavaScript code to render the design in your browser
 
-- Before running this game you should check out _rules.py_ file and modify some rules like: Number of rows, columns, row_pieces and pawn color which starts the game
+- Before running this game you should check out _rules.py_ file and modify some rules like: Number of rows, columns, row_pieces, pawn color which starts the game and the strategies for each player:
+
+-- conqueror
+-- evasive
+-- block
+-- enhanced
 
 - After you modify _rules.py_ you can run `python3 main.py` to see resuls in the command line
 
